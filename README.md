@@ -1,0 +1,2 @@
+# lugbot
+Ruby IRC Bot
