@@ -3,18 +3,18 @@ require 'rubygems'
 require 'isaac'
 require './botdb'
 require './botrss'
-require './botsults'
+require './botinsults'
 
 	CHNL = "bblug"
 	DBFILE = CHNL+".dat"
-        SULTFILE = CHNL+".sults"
+        INSULTFILE = CHNL+".insults"
         RSSFEED = "linux"
 	myDB = DB.new(DBFILE)
         myRSS = BOTRSS.new(RSSFEED)
-        mySULTS = SULTS.new(SULTFILE)
+        myINSULTS = INSULTS.new(INSULTFILE)
 
         rand_topic = 100
-        rand_sult = 80 
+        rand_insult = 80 
 
 configure do |c|
  c.nick    = "LUGBOT"
@@ -26,7 +26,7 @@ end
 on :connect do
   join "##{CHNL}"
   myDB.load
-  mySULTS.load
+  myINSULTS.load
 end
 
 on :private, /^dbsize/ do
@@ -70,9 +70,9 @@ on :channel, /(.*)/ do
     puts "Answered: #{response}"
     input.gsub!(/^[a-zA-Z0-9^_-]{1,12}:/, "")
     myDB.append(input)
-  elsif rand(rand_sult) == 13 then
+  elsif rand(rand_insult) == 13 then
     # Random insult, also add input to DB
-    response = mySULTS.insult()
+    response = myINSULTS.insult()
     msg channel, "#{response}"
     puts "Insulted: #{response}"
     # Add input to DB

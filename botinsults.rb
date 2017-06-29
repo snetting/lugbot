@@ -1,20 +1,20 @@
 
 
-class SULTS
+class INSULTS
 
   def initialize(db)
-    @sultsname=db
+    @insultsname=db
     @database = Array.new
   end
 
   def load
-    if File.exist?("#{@sultsname}")
-      p "- Found existing #{@sultsname}"
-      @database = IO.readlines("#{@sultsname}")
+    if File.exist?("#{@insultsname}")
+      p "- Found existing #{@insultsname}"
+      @database = IO.readlines("#{@insultsname}")
       p "- imported #{@database.size} insults"
       return @database.size
     else
-      p "- #{@sultsname} not found"
+      p "- #{@insultsname} not found"
     end
   end
 

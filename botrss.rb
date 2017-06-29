@@ -32,8 +32,9 @@ class BOTRSS
         @url = 'http://cpcwiki.eu/forum/index.php?type=rss;action=.xml'
     elsif @rss_name == "linux"
         @platform = 'Linux'
-        @url = 'http://rss.slashdot.org/Slashdot/slashdotLinux'
+        #@url = 'http://rss.slashdot.org/Slashdot/slashdotLinux'
         #@url = 'http://cpcwiki.eu/forum/index.php?type=rss;action=.xml'
+        @url = 'http://rss.slashdot.org/Slashdot/slashdotMain'
     else
       return("RSS Error") 
     end
