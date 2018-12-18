@@ -13,8 +13,8 @@ require './botinsults'
         myRSS = BOTRSS.new(RSSFEED)
         myINSULTS = INSULTS.new(INSULTFILE)
 
-        rand_topic = 100
-        rand_insult = 80 
+        rand_topic = 200
+        rand_insult = 180 
 
 configure do |c|
  c.nick    = "LUGBOT"
@@ -43,9 +43,26 @@ on :private, /^save/ do
 end
 
 on :private, /^help/ do
-	msg nick, "I can 'load', 'save' and return my 'dbsize'."
-	msg nick, "If unhappy with search results, try asking again!"
+	msg nick, "I can 'load' and 'save' my DB, return my 'dbsize' and also 'op' trusted users."
 end	
+
+# Priv request for ops - only given to trusted users
+on :private, /^op/ do
+        mode "#bblug", "+o spirit3"
+        mode "#bblug", "+o Syd"
+        mode "#bblug", "+o OH3SPN"
+        #raw "OPER #bblug +o OH3SPN"
+        #raw ("OPER #bblug -o OH3SPN")
+        msg nick, "Ops given to trusted users."
+end
+
+# Add regex to catch and kick spammers
+on :channel, /(.*)(ATTN|ATTΝ|οsirislab)(.*)/ do
+        puts "Caught banhammer flag"
+        puts "#{nick} bblug goodbye"
+        kick "#bblug", "#{nick}", "Expecto Patronum!"
+        #raw "kick #{nick} #bblug Goodbye"
+end
 
 #on :private, /^search (.*)/ do
 on :channel, /(.*)/ do
